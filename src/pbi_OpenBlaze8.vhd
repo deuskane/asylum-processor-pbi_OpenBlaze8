@@ -6,7 +6,7 @@
 -- Author     : Mathieu Rosiere
 -- Company    : 
 -- Created    : 2017-03-30
--- Last update: 2021-09-02
+-- Last update: 2021-11-16
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -49,9 +49,7 @@ entity pbi_OpenBlaze8 is
 
     -- To/From IT Ctrl
     interrupt_i      : in    std_logic;
-    interrupt_ack_o  : out   std_logic;
-
-    debug_o          : out OpenBlaze8_debug_t
+    interrupt_ack_o  : out   std_logic
     );
   
 end entity pbi_OpenBlaze8;
@@ -79,14 +77,13 @@ begin  -- architecture rtl
     reset_i           => arst           ,
     address_o         => iaddr_o        ,
     instruction_i     => idata_i        ,
-    port_id_o         => pbi_ini_o.addr   ,
-    in_port_i         => pbi_tgt_i.rdata  ,
-    out_port_o        => pbi_ini_o.wdata  ,
-    read_strobe_o     => pbi_ini_o.re     ,
-    write_strobe_o    => pbi_ini_o.we     ,
+    port_id_o         => pbi_ini_o.addr ,
+    in_port_i         => pbi_tgt_i.rdata,
+    out_port_o        => pbi_ini_o.wdata,
+    read_strobe_o     => pbi_ini_o.re   ,
+    write_strobe_o    => pbi_ini_o.we   ,
     interrupt_i       => interrupt_i    ,
-    interrupt_ack_o   => interrupt_ack_o,
-    debug_o           => debug_o
+    interrupt_ack_o   => interrupt_ack_o
     );
 
 end architecture rtl;

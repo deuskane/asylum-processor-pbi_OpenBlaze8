@@ -14,9 +14,10 @@ CAPI=2:
 # Revisions  :
 # Date        Version  Author   Description
 # 2021-10-26  1.0.0    mrosiere Created
+# 2025-01-21  1.1.0    mrosiere Fix busy usage
 #-----------------------------------------------------------------------------
 
-name : asylum:processor:pbi_OpenBlaze8:1.0.0
+name        : asylum:processor:pbi_OpenBlaze8:1.1.0
 description : PBI Generic wrapper for target IP
 
 filesets:

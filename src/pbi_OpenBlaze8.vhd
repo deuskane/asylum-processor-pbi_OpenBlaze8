@@ -6,7 +6,7 @@
 -- Author     : Mathieu Rosiere
 -- Company    : 
 -- Created    : 2017-03-30
--- Last update: 2021-11-16
+-- Last update: 2025-01-21
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -15,8 +15,9 @@
 -- Copyright (c) 2017 
 -------------------------------------------------------------------------------
 -- Revisions  :
--- Date        Version  Author  Description
--- 2017-03-30  1.0      mrosiere	Created
+-- Date        Version  Author   Description
+-- 2017-03-30  1.0      mrosiere Created
+-- 2025-01-21  1.1      mrosiere Fix busy usage
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -60,7 +61,7 @@ architecture rtl of pbi_OpenBlaze8 is
 begin  -- architecture rtl
 
   arst <= not arstn_i;
-  cke  <= cke_i or not pbi_tgt_i.busy;
+  cke  <= cke_i and not pbi_tgt_i.busy;
   
   OpenBlaze8 : entity work.OpenBlaze8(rtl)
   generic map(

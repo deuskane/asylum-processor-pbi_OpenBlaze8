@@ -6,7 +6,7 @@
 -- Author     : Mathieu Rosiere
 -- Company    : 
 -- Created    : 2017-03-30
--- Last update: 2025-01-21
+-- Last update: 2025-03-08
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -20,12 +20,14 @@
 -- 2025-01-21  1.1      mrosiere Fix busy usage
 -------------------------------------------------------------------------------
 
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+
+library IEEE;
+use     IEEE.STD_LOGIC_1164.ALL;
+use     IEEE.numeric_std.ALL;
 library work;
-use work.OpenBlaze8_pkg.all;
-use work.pbi_pkg.all;
+library work;
+use     work.pbi_pkg.all;
+use     work.OpenBlaze8_pkg.all;
 
 entity pbi_OpenBlaze8 is
   generic (
@@ -87,4 +89,6 @@ begin  -- architecture rtl
     interrupt_ack_o   => interrupt_ack_o
     );
 
+  pbi_ini_o.cs <= '1';
+  
 end architecture rtl;

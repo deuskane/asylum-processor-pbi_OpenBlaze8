@@ -33,7 +33,7 @@ filesets:
     file_type : vhdlSource
     depend :
       - ">=asylum:processor:OpenBlaze8:1.0.0"
-      - ">=asylum:package:pbi_pkg:1.0.0"
+      - asylum:utils:pkg
 
 targets:
 

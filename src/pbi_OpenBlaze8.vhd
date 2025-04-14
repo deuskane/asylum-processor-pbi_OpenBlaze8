@@ -6,7 +6,7 @@
 -- Author     : Mathieu Rosiere
 -- Company    : 
 -- Created    : 2017-03-30
--- Last update: 2025-03-17
+-- Last update: 2025-04-14
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -20,8 +20,8 @@
 -- 2025-01-21  1.1      mrosiere Fix busy usage
 -- 2025-03-09  1.2      mrosiere Use unconstrainted pbi
 -- 2025-03-15  1.3      mrosiere Stall idata_i when cke desasserted
+-- 2025-04-14  1.4      mrosiere Add output ics_o
 -------------------------------------------------------------------------------
-
 
 library IEEE;
 use     IEEE.STD_LOGIC_1164.ALL;
@@ -45,6 +45,7 @@ entity pbi_OpenBlaze8 is
     arstn_i          : in    std_logic; -- asynchronous reset
 
     -- Instructions
+    ics_o            : out std_logic;
     iaddr_o          : out std_logic_vector(ADDR_INST_WIDTH-1 downto 0);
     idata_i          : in  std_logic_vector(18-1 downto 0);
     
@@ -62,34 +63,11 @@ end entity pbi_OpenBlaze8;
 architecture rtl of pbi_OpenBlaze8 is
   signal cke     : std_logic;
   signal arst    : std_logic;
-  signal cke_r   : std_logic;
-  signal idata_r : std_logic_vector(18-1 downto 0);
-  signal idata   : std_logic_vector(18-1 downto 0);
 begin  -- architecture rtl
 
   arst    <= not arstn_i;
   cke     <= cke_i and not pbi_tgt_i.busy;
-
-  -- If Clock disable from busy bus per exemple, save the rom and send in
-  -- continous -> Bus access is unchanged
-  process (clk_i, arst) is
-  begin  -- process
-    if arst = '1'
-    then               -- asynchronous reset (active low)
-      cke_r   <= '0';
-      idata_r <= (others => '0');
-    elsif rising_edge(clk_i)
-    then
-      cke_r   <= cke;
-      if cke
-      then
-        idata_r <= idata_i;
-      end if;
-    end if;
-  end process;
-
-  idata   <= idata_r when cke_r = '0' else
-             idata_i;
+  ics_o   <= cke;
   
   OpenBlaze8 : entity work.OpenBlaze8(rtl)
   generic map(
@@ -105,7 +83,7 @@ begin  -- architecture rtl
     clock_enable_i    => cke            ,
     reset_i           => arst           ,
     address_o         => iaddr_o        ,
-    instruction_i     => idata          ,
+    instruction_i     => idata_i        ,
     port_id_o         => pbi_ini_o.addr ,
     in_port_i         => pbi_tgt_i.rdata,
     out_port_o        => pbi_ini_o.wdata,

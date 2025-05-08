@@ -18,9 +18,10 @@ CAPI=2:
 # 2025-03-09  1.2.0    mrosiere Use unconstrainted pbi
 # 2025-03-15  1.3.0    mrosiere Stall idata_i when cke desasserted
 # 2025-04-14  1.4.0    mrosiere Add output ics_o
+# 2025-05-08  1.5.0    mrosiere data cs depend of re and we
 #-----------------------------------------------------------------------------
 
-name        : asylum:processor:pbi_OpenBlaze8:1.4.0
+name        : asylum:processor:pbi_OpenBlaze8:1.5.0
 description : OpenBlaze8 Module with PBI interface 
 
 filesets:

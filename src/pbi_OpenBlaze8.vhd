@@ -6,7 +6,7 @@
 -- Author     : Mathieu Rosiere
 -- Company    : 
 -- Created    : 2017-03-30
--- Last update: 2025-04-14
+-- Last update: 2025-05-08
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -21,6 +21,7 @@
 -- 2025-03-09  1.2      mrosiere Use unconstrainted pbi
 -- 2025-03-15  1.3      mrosiere Stall idata_i when cke desasserted
 -- 2025-04-14  1.4      mrosiere Add output ics_o
+-- 2025-05-08  1.5      mrosiere data cs depend of re and we
 -------------------------------------------------------------------------------
 
 library IEEE;
@@ -61,6 +62,8 @@ entity pbi_OpenBlaze8 is
 end entity pbi_OpenBlaze8;
 
 architecture rtl of pbi_OpenBlaze8 is
+  signal dre     : std_logic;
+  signal dwe     : std_logic;
   signal cke     : std_logic;
   signal arst    : std_logic;
 begin  -- architecture rtl
@@ -87,12 +90,14 @@ begin  -- architecture rtl
     port_id_o         => pbi_ini_o.addr ,
     in_port_i         => pbi_tgt_i.rdata,
     out_port_o        => pbi_ini_o.wdata,
-    read_strobe_o     => pbi_ini_o.re   ,
-    write_strobe_o    => pbi_ini_o.we   ,
+    read_strobe_o     => dre   ,
+    write_strobe_o    => dwe   ,
     interrupt_i       => interrupt_i    ,
     interrupt_ack_o   => interrupt_ack_o
     );
 
-  pbi_ini_o.cs <= '1';
+  pbi_ini_o.cs <= dre or dwe;
+  pbi_ini_o.re <= dre;
+  pbi_ini_o.we <= dwe;
   
 end architecture rtl;

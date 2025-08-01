@@ -31,7 +31,7 @@ filesets:
   #---------------------------------------
   files_hdl:
     files:
-      - src/pbi_OpenBlaze8.vhd
+      - hdl/pbi_OpenBlaze8.vhd
     file_type : vhdlSource
     depend :
       - ">=asylum:processor:OpenBlaze8:1.0.0"

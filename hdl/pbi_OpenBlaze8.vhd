@@ -6,7 +6,7 @@
 -- Author     : Mathieu Rosiere
 -- Company    : 
 -- Created    : 2017-03-30
--- Last update: 2025-05-08
+-- Last update: 2025-09-06
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ begin  -- architecture rtl
   cke     <= cke_i and not pbi_tgt_i.busy;
   ics_o   <= cke;
   
-  OpenBlaze8 : entity work.OpenBlaze8(rtl)
+  ins_OpenBlaze8 : OpenBlaze8
   generic map(
      STACK_DEPTH     => STACK_DEPTH    ,
      RAM_DEPTH       => RAM_DEPTH      ,

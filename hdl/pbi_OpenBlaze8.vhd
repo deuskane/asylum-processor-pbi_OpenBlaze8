@@ -27,10 +27,10 @@
 library IEEE;
 use     IEEE.STD_LOGIC_1164.ALL;
 use     IEEE.numeric_std.ALL;
-library work;
-library work;
-use     work.pbi_pkg.all;
-use     work.OpenBlaze8_pkg.all;
+library asylum;
+library asylum;
+use     asylum.pbi_pkg.all;
+use     asylum.OpenBlaze8_pkg.all;
 
 entity pbi_OpenBlaze8 is
   generic (
